@@ -11,7 +11,8 @@ const routes = [
   {
     path: '/checkout',
     name: 'checkout',
-    component: CheckoutView
+    component: CheckoutView,
+    props: true,
   },
 ]
 

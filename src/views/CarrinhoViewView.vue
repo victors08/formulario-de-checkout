@@ -14,7 +14,9 @@
 
       <q-separator color="primary"/>
 
-      
+      <q-form
+        @submit="onSubmit"
+      >
         <div class="fit column content-start">
           <div class="fit row justify-between q-pa-md">
             <q-img
@@ -25,9 +27,11 @@
             <div class="col-3">
               <h6 class="q-mx-md">Adesivo React Js</h6>
               <InputTexto 
-                string_etiqueta="Adesivos"
+                string_etiqueta="Quantidade"
+                prm_isObrigatorio=true
                 type="number"
-                v-model="selected"
+                v-model="arrayPedidos[0].valor"
+                min="0"
               />
             </div>
           </div>
@@ -44,9 +48,11 @@
             <div class="col-3">
               <h6 class="q-mx-md">Adesivo Vue Js</h6>
               <InputTexto 
-                string_etiqueta="Adesivos"
+                string_etiqueta="Quantidade"
+                prm_isObrigatorio=true
                 type="number"
-                v-model="selected"
+                v-model="arrayPedidos[1].valor"
+                min="0"
               />
             </div>
           </div>
@@ -63,9 +69,11 @@
             <div class="col-3">
               <h6 class="q-mx-md">Adesivo Angular Js</h6>
               <InputTexto 
-                string_etiqueta="Adesivos"
+                string_etiqueta="Quantidade"
+                prm_isObrigatorio=true
                 type="number"
-                v-model="selecionado"
+                v-model="arrayPedidos[2].valor"
+                min="0"
               />
             </div>
           </div>
@@ -80,17 +88,19 @@
             label="Confirma pedido"
             type="submit"
             color="primary"
-            @click="this.$router.push('/checkout')"
           />
+          <!-- 
+            Push pode usar OBJETO; se usando string é o equivalente a objeto {path: 'string'}
+            {path: 'checkout', arrayPedidos: arrayPedidos}
+          -->
         </div>
-      
+      </q-form>
 
     </div>
   </q-page-container>
 </template>
 
 <script>
-
 
 import InputTexto from '@/components/campos/inputTexto.vue'
 
@@ -99,11 +109,30 @@ export default {
   components: {
     InputTexto,
   },
-  setup(){
+  data(){
     
-    return { 
-      selecionado: '',
+
+    return {
+      arrayPedidos:[
+      {label: 'React', valor: ''},
+      {label: 'Vue', valor: ''},
+      {label: 'Angular', valor: ''},
+      ]
     }
   },
+  methods: {
+    onSubmit(e){
+      e.preventDefault()
+
+      //console.log(this.arrayPedidos)
+
+      this.$router.push({name: 'checkout', params: {
+        vue: this.arrayPedidos[1].valor,
+        react: this.arrayPedidos[0].valor,
+        angular: this.arrayPedidos[2].valor }
+      })
+      
+    }
+  }
 }
 </script>

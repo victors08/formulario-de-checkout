@@ -1,16 +1,207 @@
 <template>
-  <div>
-    <h4>Finalize sua compra</h4>
-    
-    <div>principal</div>
-  </div>
-    
+  <q-page-container>
+    <div class="q-pl-xl" style="max-width: 80%;">
+      <div class="row">
+        <h5 class="col-5 text-weight-bold" style="color:blue">
+          Finalizar comprar
+        </h5>
+      </div>
 
+      <q-separator color="primary"/>
 
+      <div class="fit row">
+        <div class="col-6 q-ma-sm q-pa-sm" style="width: 50%; height: 40%">
+          <h6 class="q-ml-sm">Dados pessoais</h6>
+
+          <q-form class="fit row">
+            <InputTexto
+              string_etiqueta="Nome completo"
+              prm_isObrigatorio=true
+              class="col-6 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="CPF"
+              prm_isObrigatorio=true
+              class="col-4 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="Telefone"
+              prm_isObrigatorio=true
+              class="col-4 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="Email"
+              prm_isObrigatorio=true
+              class="col-6 q-ma-xs"
+              type="email"
+            />
+
+            <q-btn
+            class="col-md-4 offset-md-7 q-ma-sm"
+            label="Salvar"
+            type="submit"
+            color="positive"
+            style="height: 22px; width: 110px"
+          />
+          </q-form>
+
+          <h6 class="q-ml-sm">Dados para entrega</h6>
+
+          <q-form class="fit row">
+            <InputTexto
+              string_etiqueta="CEP"
+              prm_isObrigatorio=true
+              class="col-3 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="Rua"
+              prm_isObrigatorio=true
+              class="col-7 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="Complemento"
+              prm_isObrigatorio=true
+              class="col-6 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="Bairro"
+              prm_isObrigatorio=true
+              class="col-4 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="Cidade"
+              prm_isObrigatorio=true
+              class="col-6 q-ma-xs"
+            />
+
+            <InputTexto
+              string_etiqueta="UF"
+              prm_isObrigatorio=true
+              class="col-4 q-ma-xs"
+            />
+
+            <q-btn
+            class="col-md-4 offset-md-7 q-ma-sm"
+            label="Salvar"
+            type="submit"
+            color="positive"
+            style="height: 22px; width: 110px"
+          />
+          </q-form>
+        </div>
+
+        <div class="col-5 q-ma-xs">
+          <h6>Resumo do pedido</h6>
+        </div>
+      </div>
+     
+      <q-separator spaced />
+
+      <div class="fit row">
+        
+        <h5 class="row text-weight-bold col-5" style="color:blue">
+          Pagamento
+        </h5>
+
+        <q-separator color="primary" />
+
+        <div class="col-12">
+          <q-card>
+        <q-tabs
+          v-model="tab"
+          dense
+          class="text-grey"
+          active-color="primary"
+          indicator-color="primary"
+          align="justify"
+          narrow-indicator
+        >
+          <q-tab name="mails" label="Mails" />
+          <q-tab name="alarms" label="Alarms" />
+          <q-tab name="movies" label="Movies" />
+        </q-tabs>
+
+        <q-separator />
+
+        <q-tab-panels v-model="tab" animated>
+          <q-tab-panel name="mails">
+            <div class="text-h6">Mails</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+
+          <q-tab-panel name="alarms">
+            <div class="text-h6">Alarms</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+
+          <q-tab-panel name="movies">
+            <div class="text-h6">Movies</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+        </q-tab-panels>
+      </q-card>
+
+      <q-card>
+        <q-tab-panels v-model="tab" animated>
+          <q-tab-panel name="mails">
+            <div class="text-h6">Mails</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+
+          <q-tab-panel name="alarms">
+            <div class="text-h6">Alarms</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+
+          <q-tab-panel name="movies">
+            <div class="text-h6">Movies</div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          </q-tab-panel>
+        </q-tab-panels>
+
+        <q-separator />
+
+        <q-tabs
+          v-model="tab"
+          dense
+          class="bg-grey-3"
+          align="justify"
+          narrow-indicator
+        >
+          <q-tab name="mails" label="Mails" />
+          <q-tab name="alarms" label="Alarms" />
+          <q-tab name="movies" label="Movies" />
+        </q-tabs>
+      </q-card>
+        </div>
+      </div>
+
+    </div>
+  </q-page-container>
 </template>
 
 <script>
+
+import { ref } from 'vue'
+
+import InputTexto from '@/components/campos/inputTexto.vue'
+
 export default {
-  name: 'FormCheckout'
+  name: 'FormCheckout',
+  components: {
+    InputTexto,
+  },
+  setup(){
+    return {
+      tab: ref('mails')
+    }
+  }
 }
 </script>
