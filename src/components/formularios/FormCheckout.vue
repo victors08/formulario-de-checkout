@@ -13,7 +13,10 @@
         <div class="col-6 q-ma-sm q-pa-sm" style="width: 50%; height: 40%">
           <h6 class="q-ml-sm">Dados pessoais</h6>
 
-          <q-form class="fit row">
+          <q-form 
+            class="fit row"
+            @submit="onSubmit"
+          >
             <InputTexto
               string_etiqueta="Nome completo"
               prm_isObrigatorio=true
@@ -50,7 +53,9 @@
 
           <h6 class="q-ml-sm">Dados para entrega</h6>
 
-          <q-form class="fit row">
+          <q-form 
+            class="fit row"
+            @submit="onSubmit">
             <InputTexto
               string_etiqueta="CEP"
               prm_isObrigatorio=true
@@ -99,7 +104,13 @@
 
         <div class="col-5 q-ma-xs">
           <h6>Resumo do pedido</h6>
-        </div>
+
+          <div style="color:gray;"> 
+            Quantidade de itens selecionados: <br/>
+            Adesivo React: {{react}}
+          </div>
+      </div>
+
       </div>
      
       <q-separator spaced />
@@ -112,77 +123,60 @@
 
         <q-separator color="primary" />
 
-        <div class="col-12">
-          <q-card>
-        <q-tabs
-          v-model="tab"
-          dense
-          class="text-grey"
-          active-color="primary"
-          indicator-color="primary"
-          align="justify"
-          narrow-indicator
-        >
-          <q-tab name="mails" label="Mails" />
-          <q-tab name="alarms" label="Alarms" />
-          <q-tab name="movies" label="Movies" />
-        </q-tabs>
+          <div class="col-12">
 
-        <q-separator />
+            <div class="q-gutter-y-md">
+              <q-tabs
+                v-model="tab"
+                dense
+                align="justify"
+                active-color="primary"
+                indicator-color="primary"
+                class="text-teal"
+                narrow-indicator
+              >
+                <q-tab name="credit" >
+                  <q-btn
+                    icon="credit_card" 
+                    label="Cartão de crédito" 
+                  />
+                </q-tab>
+                <q-tab name="boleto">
+                  <q-btn 
+                    :icon="fasBarcode" 
+                    label="Boleto bancário"
+                  />
+                </q-tab>
+                <q-tab name="pix">
+                  <q-btn
+                    :icon="fasPix" 
+                    label="Pix"
+                  />
+                </q-tab>
+              </q-tabs>
 
-        <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="mails">
-            <div class="text-h6">Mails</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
+              <q-separator />
 
-          <q-tab-panel name="alarms">
-            <div class="text-h6">Alarms</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
+              <q-tab-panels class="q-ma-md" v-model="tab" animated>
+                <q-tab-panel name="credit">
+                  <div class="text-h6">Mails</div>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </q-tab-panel>
 
-          <q-tab-panel name="movies">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-        </q-tab-panels>
-      </q-card>
+                <q-tab-panel name="boleto">
+                  <div class="text-h6">Alarms</div>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </q-tab-panel>
 
-      <q-card>
-        <q-tab-panels v-model="tab" animated>
-          <q-tab-panel name="mails">
-            <div class="text-h6">Mails</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
+                <q-tab-panel name="pix">
+                  <div class="text-h6">Movies</div>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </q-tab-panel>
+              </q-tab-panels>
 
-          <q-tab-panel name="alarms">
-            <div class="text-h6">Alarms</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-
-          <q-tab-panel name="movies">
-            <div class="text-h6">Movies</div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </q-tab-panel>
-        </q-tab-panels>
-
-        <q-separator />
-
-        <q-tabs
-          v-model="tab"
-          dense
-          class="bg-grey-3"
-          align="justify"
-          narrow-indicator
-        >
-          <q-tab name="mails" label="Mails" />
-          <q-tab name="alarms" label="Alarms" />
-          <q-tab name="movies" label="Movies" />
-        </q-tabs>
-      </q-card>
-        </div>
+            </div>
+          </div>
       </div>
-
     </div>
   </q-page-container>
 </template>
@@ -190,6 +184,7 @@
 <script>
 
 import { ref } from 'vue'
+import { fasBarcode } from '@quasar/extras/fontawesome-v6'
 
 import InputTexto from '@/components/campos/inputTexto.vue'
 
@@ -201,6 +196,14 @@ export default {
   setup(){
     return {
       tab: ref('mails')
+    }
+  },
+  created(){
+    this.fasBarcode = fasBarcode
+  },
+  methods: {
+    onSubmit(e){
+      e.preventDefault()
     }
   }
 }

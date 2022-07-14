@@ -114,9 +114,9 @@ export default {
 
     return {
       arrayPedidos:[
-      {label: 'React', valor: ''},
-      {label: 'Vue', valor: ''},
-      {label: 'Angular', valor: ''},
+      {label: 'React', valor: 1},
+      {label: 'Vue', valor: 1},
+      {label: 'Angular', valor: 1},
       ]
     }
   },
